@@ -1,6 +1,107 @@
 import cv2
 import numpy as np
 import mysql.connector
+from datetime import datetime
+
+# Load pre-trained face detection model
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+
+# Function to connect to the database and retrieve face images
+def retrieve_faces_from_database():
+    conn = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='',
+        database='formdata'
+    )
+    c = conn.cursor()
+    c.execute("SELECT full_name, picture FROM ticketinfo")
+    records = c.fetchall()
+    conn.close()
+    return records
+
+# Function to compare face with database
+def compare_face_with_database(face, faces_from_db):
+    for (full_name, db_picture_path) in faces_from_db:
+        db_image = cv2.imread(db_picture_path)
+        db_gray = cv2.cvtColor(db_image, cv2.COLOR_BGR2GRAY)
+        db_face = face_cascade.detectMultiScale(db_gray, scaleFactor=1.3, minNeighbors=5)
+
+        for (x, y, w, h) in db_face:
+            db_roi_gray = db_gray[y:y+h, x:x+w]
+            db_roi_color = db_image[y:y+h, x:x+w]
+
+            # Compare faces
+            # Example: You can use face recognition libraries like OpenCV's face recognition module or dlib for comparison
+
+            # If the faces match, return the name
+            # Example: If faces match, return full_name
+            return full_name
+
+    return None
+
+# Main function to capture video from camera and perform face recognition
+def main():
+    faces_from_db = retrieve_faces_from_database()
+
+    cap = cv2.VideoCapture(0)  # 0 is the default camera
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        faces = face_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
+
+        for (x, y, w, h) in faces:
+            roi_gray = gray[y:y+h, x:x+w]
+            roi_color = frame[y:y+h, x:x+w]
+
+            # Compare each face with the faces from the database
+            matched_name = compare_face_with_database(roi_color, faces_from_db)
+            if matched_name:
+                # If a match is found, display the name on the frame
+                cv2.putText(frame, matched_name, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36, 255, 12), 2)
+
+        cv2.imshow('Face Recognition', frame)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    import cv2
+import numpy as np
+import mysql.connector
 from skimage.feature import local_binary_pattern
 
 # Load pre-trained face detection model
@@ -64,16 +165,6 @@ def main():
     faces_from_db = retrieve_faces_from_database()
     THRESHOLD = 0.5  # Define your threshold value here
 
-    if not faces_from_db:
-        # Display a message indicating that the database is empty
-        empty_message = "Database is empty."
-        empty_frame = np.zeros((200, 600, 3), dtype=np.uint8)
-        cv2.putText(empty_frame, empty_message, (50, 100), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36, 255, 12), 2)
-        cv2.imshow('Face Recognition', empty_frame)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-        return
-
     cap = cv2.VideoCapture(0)  # 0 is the default camera
 
     while True:
@@ -117,3 +208,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
