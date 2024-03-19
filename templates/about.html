@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Museum Name</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS for styling */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .jumbotron {
+            background-color: #f8f9fa; /* Light grey background */
+        }
+        .jumbotron h1 {
+            color: #007bff; /* Blue color for headings */
+        }
+        .jumbotron p {
+            color: #6c757d; /* Dark grey color for text */
+        }
+         .museum-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar included from 'navbar.html' -->
+{% include 'navbar.html' %}
+
+<div class="container mt-4">
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to Museum </h1>
+        <p class="lead">Explore the rich history and culture with us.</p>
+        <hr class="my-4">
+        <p>Founded in 1978, Museum  has been a hub of knowledge and inspiration for generations. Our mission is to preserve, educate, and inspire through our vast collection of artifacts, artworks, and exhibitions.</p>
+        <p>Visit us to discover the wonders of the past, present, and future. Immerse yourself in our diverse exhibitions, interactive displays, and engaging programs.</p>
+<!--        <a class="btn btn-primary btn-lg" href="#" role="button">Explore Exhibitions</a>-->
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Our History</h2>
+            <p>Since its inception, Museum Name has played a significant role in preserving cultural heritage and promoting understanding across communities. Learn more about our journey and milestones.</p>
+        </div>
+        <div class="col-md-6">
+            <img src="https://cdn.pixabay.com/photo/2021/08/14/01/58/museum-6544420_1280.jpg" alt="Museum History" class="museum-image">
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <img src="https://rereeti.org/wp-content/uploads/2023/08/banner-image-ajaibghar-ai-post-980x490.png" alt="Museum Collections" class="museum-image">
+        </div>
+        <div class="col-md-6">
+            <h2>Our Collections</h2>
+            <p>Our museum boasts a diverse collection of artifacts, artworks, and historical objects from various cultures and time periods. Explore our collections and delve into the stories they tell.</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h2>Visit Us</h2>
+            <p>Plan your visit to Museum Name and experience a journey through history. Discover our exhibitions, events, and facilities to make the most of your visit.</p>
+        </div>
+        <div class="col-md-6">
+            <img src="https://cdn.pixabay.com/photo/2019/07/03/09/41/national-history-museum-4314035_1280.jpg" alt="Visit Museum" class="museum-image">
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

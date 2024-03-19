@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Buy Museum Tickets</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+<!--            background-image: url('museum_background.jpg'); /* Replace 'museum_background.jpg' with the path to your image */-->
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .form-container {
+            max-width: 500px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 2.8); /* Add opacity for better visibility */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-container form .form-group {
+            margin-bottom: 20px;
+        }
+        .form-container form .btn-primary {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            cursor: pointer;
+        }
+        .form-container form .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .container{
+        margin-left:225px}
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+    {% include 'navbar.html' %}
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="form-container">
+                <h2>Buy Museum Tickets</h2>
+                <form action="/buy_tickets" enctype="multipart/form-data" method="post">
+                    <div class="form-group">
+                        <input class="form-control" name="full_name" placeholder="Full Name" required type="text">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" name="email" placeholder="Email" required type="email">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" name="mobile_number" placeholder="Mobile Number" required
+                               type="tel">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" name="age" placeholder="Age" required type="number">
+                    </div>
+                    <div class="form-group">
+                        <label for="ticket_price">Select Ticket Price:</label>
+                        <select class="form-control" id="ticket_price" name="ticket_price">
+                            <option value="50">Standard - $50</option>
+                            <option value="100">VIP - $100</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="picture">Upload Picture:</label>
+                        <input class="form-control-file" id="picture" name="picture" type="file">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Buy Tickets</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
